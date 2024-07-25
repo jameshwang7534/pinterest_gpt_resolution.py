@@ -19,7 +19,7 @@ class Scraper:
     # Download images
     def download_images(self, keyword):
         # the folder you want to save
-        base_folder = "/Users/james/Desktop" #input folder directory
+        base_folder = "/Users/james/Google Drive/Shared drives/Planningo/train/pinterest crawling" #input folder directory
         folder = os.path.join(base_folder, keyword.replace(" ", "_"))
         number = 0
         
@@ -66,7 +66,10 @@ class Scraper:
             self.image_urls.append(i["images"][self.config.image_quality]["url"])
 
         if len(self.image_urls) < int(self.config.file_length):
-            self.config.bookmarks = resource_response["bookmark"]
+            if "bookmark" in resource_response:
+                self.config.bookmarks = resource_response["bookmark"]
+            else:
+                self.config.bookmarks = ""  # or handle this case as needed
             print("Creating links", len(self.image_urls))
             self.get_urls()
         
@@ -79,7 +82,7 @@ class Scraper:
             image = Image.open(BytesIO(response.content))
             width, height = image.size
             #input resolution here
-            if width >= 500 and height >= 500:
+            if width >= 900 and height >= 1000:
                 return True
             else:
                 print(f"Image skipped due to resolution: {width}x{height}")
