@@ -17,9 +17,9 @@ class Scraper:
         self.config = config
 
     # Download images
-    def download_images(self, keyword):
+    def download_images(self, keyword, base_folder):
         # the folder you want to save
-        base_folder = "/Users/james/Google Drive/Shared drives/Planningo/train/pinterest crawling" #input folder directory
+        base_folder = base_folder#input folder directory
         folder = os.path.join(base_folder, keyword.replace(" ", "_"))
         number = 0
         
@@ -75,7 +75,7 @@ class Scraper:
         
         return self.image_urls[0:self.config.file_length]
 
-    # fix resolution
+    # fix resolution, 이미지 resolution 여기서 수정
     def check_image_resolution(self, url):
         try:
             response = requests.get(url)
