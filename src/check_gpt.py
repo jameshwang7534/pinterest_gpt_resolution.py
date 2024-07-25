@@ -76,10 +76,12 @@ def get_product_info_from_image(image_path):
 def evaluate_conditions(json_str):
     json_string = json_str.replace('\n','').replace('```json','').replace('```','').replace('\\','')
     parsed_dict = json.loads(json_string)
+    
+    # 변수들을 선언하고 boolean true/false에 맞게 리턴값을 조절한다.
     contains_human = parsed_dict['contains_human']
     composition_photo = parsed_dict['composition_photo']
     product_clearly_shown = parsed_dict['product_clearly_shown']
-    
+    # condition들이 true일때만 이미지 저장
     return not contains_human and not composition_photo and product_clearly_shown
 
 def is_valid_image(image_path):
